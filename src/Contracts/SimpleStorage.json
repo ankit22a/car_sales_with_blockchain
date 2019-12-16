@@ -1,0 +1,164 @@
+[
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_uid",
+				"type": "uint256"
+			},
+			{
+				"internalType": "enum CarManufacturer.Manufacturer",
+				"name": "manufacturer",
+				"type": "uint8"
+			},
+			{
+				"internalType": "string",
+				"name": "carModel",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "carVersion",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "chasisNumber",
+				"type": "uint256"
+			},
+			{
+				"internalType": "int256",
+				"name": "price",
+				"type": "int256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "sender",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "id",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "enum CarManufacturer.Manufacturer",
+				"name": "manufacturer",
+				"type": "uint8"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "carModel",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "carVersion",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "chasisNumber",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "int256",
+				"name": "price",
+				"type": "int256"
+			}
+		],
+		"name": "ManufacturedNewCar",
+		"type": "event"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "carList",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "getValue",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "_uid",
+				"type": "uint256"
+			},
+			{
+				"internalType": "enum CarManufacturer.Manufacturer",
+				"name": "manufacturer",
+				"type": "uint8"
+			},
+			{
+				"internalType": "string",
+				"name": "carModel",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "carVersion",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "chasisNumber",
+				"type": "uint256"
+			},
+			{
+				"internalType": "int256",
+				"name": "price",
+				"type": "int256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "owner",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	}
+]
