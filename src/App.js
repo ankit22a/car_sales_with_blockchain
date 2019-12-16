@@ -6,7 +6,13 @@ import SimpleStorageByteCode from "./Contracts/SimpleStorageByteCode"
 import {SIMPLE_STORAGE_CONTACT_ADDRESS} from "./Contants"
 
 function App() {
-    const [value, setValue] = useState(null);
+    const [id, setId] = useState(null);
+    const [manufacturer, setManufacturer] = useState(null);
+    const [carModel, setCarModel] = useState(null);
+    const [carVersion, setCarVersion] = useState(null);
+    const [chasisNumber, setChasisNumber] = useState(null);
+    const [price, setPrice] = useState(null);
+    const [isDisabled, setIsDisabled] = useState(false);
     const [valueFromSmartContract, setValueFromSmartContract] = useState(null);
     const [web3Reference, setWeb3Reference] = useState(null);
     const [accountAddress, setAccountAddress] = useState(null);
@@ -25,11 +31,15 @@ function App() {
             });
     }, []);
 
+    useEffect(() => {
+        setIsDisabled(!(typeof(id) === "string" && typeof(manufacturer) === "string" && typeof(carModel) === "string" && typeof(carVersion) === "string" && typeof(chasisNumber) === "string" && typeof(price) === "string"));
+    }, [id, manufacturer, carModel, carVersion, chasisNumber, price])
+
     const sendToSmartContract = async () => {
         let simpleStorageContract = new web3Reference.eth.Contract(SimpleStorageABI, selectedContractAddress)
         simpleStorageContract
             .methods
-            .set(value)
+            .set(id, manufacturer, carModel, carVersion, chasisNumber, price)
             .send({from: accountAddress})
             .then((tx) => {
                 console.log("Successfully Updated in Blockchain")
@@ -103,10 +113,20 @@ function App() {
                             return <option value={contract}> {contract} </option>
                         })}
                     </select>
-
-                    <input className={"form__control w-20"} type={"text"} onChange={(e) => setValue(e.target.value)}
+                    
+                    <input className={"form__control w-20"} type={"text"} placeholder="Id" onChange={(e) => setId(e.target.value)}
                            required/>
-                    <button disabled={value === null} className={"btn btn--green mlm"}
+                    <input className={"form__control w-20"} type={"text"} placeholder="Manufacturer" onChange={(e) => setManufacturer(e.target.value)}
+                           required/>
+                    <input className={"form__control w-20"} type={"text"} placeholder="Car model" onChange={(e) => setCarModel(e.target.value)}
+                           required/>
+                    <input className={"form__control w-20"} type={"text"} placeholder="Car version" onChange={(e) => setCarVersion(e.target.value)}
+                           required/>
+                    <input className={"form__control w-20"} type={"text"} placeholder="Chasis number" onChange={(e) => setChasisNumber(e.target.value)}
+                           required/>
+                    <input className={"form__control w-20"} type={"text"} placeholder="Price" onChange={(e) => setPrice(e.target.value)}
+                           required/>
+                    <button disabled={isDisabled} className={"btn btn--green mlm"}
                             onClick={() => sendToSmartContract()}> Set Value
                     </button>
                     <span> (Initiate a Transaction towards block chain)</span>
