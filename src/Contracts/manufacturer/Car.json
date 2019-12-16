@@ -1,0 +1,231 @@
+[
+  {
+    "inputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "eventTime",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "manufacturer",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "carModel",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "carVersion",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "chasisNumber",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "int256",
+        "name": "price",
+        "type": "int256"
+      }
+    ],
+    "name": "NewEventGeneration",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "eventTime",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "carData",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "sellerName",
+        "type": "string"
+      }
+    ],
+    "name": "NewEventSellCar",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "eventTime",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "carData",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "serviceCentreName",
+        "type": "string"
+      }
+    ],
+    "name": "NewEventServiceCar",
+    "type": "event"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "eventTime",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "carData",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "serviceCentreName",
+        "type": "string"
+      }
+    ],
+    "name": "CarServiceMaintenance",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "getValue",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "_uid",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "manufacturer",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "carModel",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "carVersion",
+        "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "chasisNumber",
+        "type": "uint256"
+      },
+      {
+        "internalType": "int256",
+        "name": "price",
+        "type": "int256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_uid",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "manufacturer",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "carModel",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "carVersion",
+        "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "chasisNumber",
+        "type": "uint256"
+      },
+      {
+        "internalType": "int256",
+        "name": "price",
+        "type": "int256"
+      }
+    ],
+    "name": "manufactureCar",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "eventTime",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "carData",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "sellerName",
+        "type": "string"
+      }
+    ],
+    "name": "sellCar",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]

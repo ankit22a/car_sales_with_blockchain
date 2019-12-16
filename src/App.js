@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import './App.css';
 import getWeb3 from "./getWeb3";
-import SimpleStorageABI from "./Contracts/SimpleStorage"
-import SimpleStorageByteCode from "./Contracts/SimpleStorageByteCode"
+import CarStorageABI from "./Contracts/manufacturer/Car"
+import CarByteCode from "./Contracts/manufacturer/CarByteCode"
 import {SIMPLE_STORAGE_CONTACT_ADDRESS} from "./Contants"
 
 function App() {
@@ -36,10 +36,10 @@ function App() {
     }, [id, manufacturer, carModel, carVersion, chasisNumber, price])
 
     const sendToSmartContract = async () => {
-        let simpleStorageContract = new web3Reference.eth.Contract(SimpleStorageABI, selectedContractAddress)
+        let simpleStorageContract = new web3Reference.eth.Contract(CarStorageABI, selectedContractAddress);
         simpleStorageContract
             .methods
-            .set(id, manufacturer, carModel, carVersion, chasisNumber, price)
+            .manufactureCar(id, manufacturer, carModel, carVersion, chasisNumber, price)
             .send({from: accountAddress})
             .then((tx) => {
                 console.log("Successfully Updated in Blockchain")
@@ -47,10 +47,10 @@ function App() {
     }
 
     const getStateFromSmartContract = () => {
-        let simpleStorageContract = new web3Reference.eth.Contract(SimpleStorageABI, selectedContractAddress)
+        let simpleStorageContract = new web3Reference.eth.Contract(CarStorageABI, selectedContractAddress)
         simpleStorageContract
             .methods
-            .get()
+            .getValue()
             .call()
             .then((data) => {
                 setValueFromSmartContract(data)
@@ -58,9 +58,9 @@ function App() {
     }
 
     const getUpdateHistory = () => {
-        let simpleStorageContract = new web3Reference.eth.Contract(SimpleStorageABI, selectedContractAddress)
+        let simpleStorageContract = new web3Reference.eth.Contract(CarStorageABI, selectedContractAddress)
         simpleStorageContract
-            .getPastEvents('NewValueAssigned', {
+            .getPastEvents('NewEventGeneration', {
                 fromBlock: 0,
                 toBlock: 'latest'
             })
@@ -75,9 +75,9 @@ function App() {
 
     const deployAnotherInstance = () => {
         setSuccessfulCreationOfContractMsg(null)
-        let simpleStorageContract = new web3Reference.eth.Contract(SimpleStorageABI)
+        let simpleStorageContract = new web3Reference.eth.Contract(CarStorageABI)
         let contractData = simpleStorageContract
-            .deploy({data: '0x'+SimpleStorageByteCode.object})
+            .deploy({data: '0x'+CarByteCode.object})
             .encodeABI()
 
         web3Reference

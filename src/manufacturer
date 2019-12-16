@@ -1,0 +1,89 @@
+pragma solidity >=0.5.0 <0.7.0;
+
+contract Car {
+    struct carData {
+        uint256 id;
+        string manufacturer;
+        string carModel;
+        string carVersion;
+        uint256 chasisNumber;
+        int price;
+    }
+    address private carCreator;
+    carData private carDataObj;
+    constructor() public  {    }
+
+    event NewCarMade(carData value);
+
+    function getValue() public view returns (uint256 _uid, string memory  manufacturer, string memory carModel, string memory carVersion,
+        uint256 chasisNumber, int price) {
+        return (carDataObj.id,
+        carDataObj.manufacturer,
+        carDataObj.carModel,
+        carDataObj.carVersion,
+        carDataObj.chasisNumber,
+        carDataObj.price);
+    }
+
+
+    event NewEventGeneration(uint256 indexed eventTime, string   manufacturer, string  carModel, string  carVersion,
+        uint256 chasisNumber, int price);
+
+    function manufactureCar(uint256 _uid, string  memory manufacturer, string memory carModel, string memory carVersion,
+        uint256 chasisNumber, int price) public {
+        Manufacture makeCar = Manufacture(0xc0084834e4e817e06f372c53e348edffe853a9c6bf12139eee98582077638fc2);
+        carDataObj=carData(uint256(_uid),manufacturer,carModel,carVersion,chasisNumber,price);
+        carCreator= msg.sender;
+        makeCar.addNewCarMade(address(this));
+        emit NewEventGeneration(_uid, manufacturer,carModel,carVersion,chasisNumber,price);
+    }
+
+    event NewEventSellCar(uint256 indexed eventTime, string carData, string sellerName);
+
+    function sellCar(uint256 eventTime, string memory carData, string memory sellerName) public {
+        SellCar sellMyCar = SellCar(0xc0084834e4e817e06f372c53e348edffe853a9c6bf12139eee98582077638fc2);
+        sellMyCar.sellCar(address(this));
+
+        emit NewEventSellCar(eventTime, carData, sellerName);
+    }
+
+    event NewEventServiceCar(uint256 indexed eventTime, string carData, string serviceCentreName);
+
+    function CarServiceMaintenance(uint256 eventTime, string memory carData, string memory serviceCentreName) public {
+        CarMaintenance serviceCar = CarMaintenance(0xc0084834e4e817e06f372c53e348edffe853a9c6bf12139eee98582077638fc2);
+        serviceCar.doMaintenanceOnCar(address(this));
+
+        emit NewEventServiceCar(eventTime, carData, serviceCentreName);
+    }
+}
+
+
+contract Manufacture {
+
+    event NewCarManufactured(address indexed carDetails);
+    constructor() public {}
+
+    function addNewCarMade(address carDetails) public {
+        emit NewCarManufactured(carDetails);
+    }
+}
+
+contract CarMaintenance {
+
+    event serviceCar(address indexed carDetails);
+    constructor () public {}
+
+    function doMaintenanceOnCar(address carDetails) public {
+        emit serviceCar(carDetails);
+    }
+}
+
+contract SellCar {
+
+    event sellCarToBuyer(address indexed carDetails);
+    constructor () public {}
+
+    function sellCar(address carDetails) public {
+        emit sellCarToBuyer(carDetails);
+    }
+}
